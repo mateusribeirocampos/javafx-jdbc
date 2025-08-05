@@ -5,61 +5,72 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label prefHeight="47.0" prefWidth="87.0" text="About">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-         <padding>
-            <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
-         </padding>
-      </Label>
-      <Label prefHeight="70.0" prefWidth="600.0" text="This software was developed as part of a JavaFX learning project, aiming to provide a simple and efficient solution for managing product information in a store." wrapText="true">
-         <padding>
-            <Insets bottom="10.0" left="20.0" right="10.0" top="20.0" />
-         </padding>
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Label prefHeight="39.0" prefWidth="566.0" text="With this system, users can:">
-         <padding>
-            <Insets bottom="5.0" left="20.0" right="10.0" top="10.0" />
-         </padding>
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Label text="- Add new products by specifying name, price, description and quantity.">
-         <padding>
-            <Insets bottom="5.0" left="20.0" right="10.0" top="5.0" />
-         </padding>
-      </Label>
-      <Label text="- Edit and update existing product details.">
-         <padding>
-            <Insets bottom="5.0" left="20.0" right="10.0" top="5.0" />
-         </padding>
-      </Label>
-      <Label text="- Remove products from the database.">
-         <padding>
-            <Insets bottom="5.0" left="20.0" right="10.0" top="5.0" />
-         </padding>
-      </Label>
-      <Label text="- View a list of all registered products in an organized table.">
-         <padding>
-            <Insets bottom="5.0" left="20.0" right="10.0" top="5.0" />
-         </padding>
-      </Label>
-      <Label text="- Store all data persistently using a local database (e.g., MySQL).">
-         <padding>
-            <Insets bottom="5.0" left="20.0" right="10.0" top="5.0" />
-         </padding>
-      </Label>
-      <Label text="The main goal is to support small businesses or individual users who need a lightweight desktop application for basic inventory control." wrapText="true">
-         <padding>
-            <Insets bottom="10.0" left="20.0" right="10.0" top="20.0" />
-         </padding>
-      </Label>
-   </children>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+	prefWidth="600.0" xmlns="http://javafx.com/javafx/21"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<Label prefHeight="47.0" prefWidth="87.0" text="About">
+			<font>
+				<Font name="System Bold" size="18.0" />
+			</font>
+			<padding>
+				<Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
+			</padding>
+		</Label>
+		<Label prefHeight="70.0" prefWidth="600.0"
+			text="This software was developed as part of a JavaFX learning project, aiming to provide a simple and efficient solution for managing product information in a store."
+			wrapText="true">
+			<padding>
+				<Insets bottom="10.0" left="20.0" right="10.0" top="20.0" />
+			</padding>
+			<font>
+				<Font size="13.0" />
+			</font>
+		</Label>
+		<Label prefHeight="39.0" prefWidth="566.0"
+			text="With this system, users can:">
+			<padding>
+				<Insets bottom="5.0" left="20.0" right="10.0" top="10.0" />
+			</padding>
+			<font>
+				<Font size="13.0" />
+			</font>
+		</Label>
+		<Label
+			text="- Add new products by specifying name, price, description and quantity.">
+			<padding>
+				<Insets bottom="5.0" left="20.0" right="10.0" top="5.0" />
+			</padding>
+		</Label>
+		<Label text="- Edit and update existing product details.">
+			<padding>
+				<Insets bottom="5.0" left="20.0" right="10.0" top="5.0" />
+			</padding>
+		</Label>
+		<Label text="- Remove products from the database.">
+			<padding>
+				<Insets bottom="5.0" left="20.0" right="10.0" top="5.0" />
+			</padding>
+		</Label>
+		<Label
+			text="- View a list of all registered products in an organized table.">
+			<padding>
+				<Insets bottom="5.0" left="20.0" right="10.0" top="5.0" />
+			</padding>
+		</Label>
+		<Label
+			text="- Store all data persistently using a local database (e.g., MySQL).">
+			<padding>
+				<Insets bottom="5.0" left="20.0" right="10.0" top="5.0" />
+			</padding>
+		</Label>
+		<Label
+			text="The main goal is to support small businesses or individual users who need a lightweight desktop application for basic inventory control."
+			wrapText="true">
+			<padding>
+				<Insets bottom="10.0" left="20.0" right="10.0" top="20.0" />
+			</padding>
+		</Label>
+	</children>
 </VBox>
