@@ -8,7 +8,6 @@ This project is a **workshop-style application** that teaches JavaFX development
 
 **Course**: Java COMPLETO - Programação Orientada a Objetos + Projetos  
 **Instructor**: Prof. Dr. Nelio Alves  
-**Platform**: educandoweb.com  
 **Reference Repository**: https://github.com/acenelio/workshop-javafx-jdbc
 
 ## 🎯 Learning Objectives
@@ -269,7 +268,6 @@ This is an educational project based on Prof. Dr. Nelio Alves' course. For learn
 ## 📝 Course Reference
 
 **Original Course Project**: https://github.com/acenelio/workshop-javafx-jdbc  
-**Course Platform**: https://educandoweb.com  
 **Instructor**: Prof. Dr. Nelio Alves
 
 ## 🎓 Educational Value
@@ -283,4 +281,4 @@ This project demonstrates professional Java development practices including:
 
 ---
 
-*This project serves as a comprehensive reference for JavaFX with JDBC development.
+*This project serves as a comprehensive reference for JavaFX with JDBC development.*
