@@ -51,7 +51,7 @@
             <Insets bottom="5.0" left="20.0" right="10.0" top="5.0" />
          </padding>
       </Label>
-      <Label text="- Store all data persistently using a local database (e.g., SQLite).">
+      <Label text="- Store all data persistently using a local database (e.g., MySQL).">
          <padding>
             <Insets bottom="5.0" left="20.0" right="10.0" top="5.0" />
          </padding>
