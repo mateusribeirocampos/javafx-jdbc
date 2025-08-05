@@ -24,7 +24,8 @@ public class Main extends Application {
 			
 			mainScene = new Scene(scrollPane);
 			primaryStage.setScene(mainScene);
-			primaryStage.setTitle("Sample JavaFX Application");
+			primaryStage.setTitle("Product registration control");
+			primaryStage.setOpacity(0.9);
 			primaryStage.show();
 		} catch(IOException e) {
 			e.printStackTrace();

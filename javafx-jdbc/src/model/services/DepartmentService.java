@@ -9,10 +9,9 @@ public class DepartmentService {
 	
 	public List<Department> findAll() {
 		List<Department> list = new ArrayList<Department>();
-		list.add(new Department(1, "Books"));
-		list.add(new Department(2, "Computers"));
-		list.add(new Department(3, "Electronics"));
+		list.add(new Department(1, "Books", 60, "Various titles of major bestsellers"));
+		list.add(new Department(2, "Computers", 15, "Top computer brands"));
+		list.add(new Department(3, "Electronics", 40, "Lots of electronics for your devices"));
 		return list;
 	}
-
 }
