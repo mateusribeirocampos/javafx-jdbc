@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+import gui.util.LoadDotEnv;
+
 public class DB {
 
 	private static Connection conn = null;
@@ -17,8 +19,11 @@ public class DB {
 		if (conn == null) {
 			try {
 				Properties props = loadProperties();
+				Properties envProps = LoadDotEnv.loadEnvProperties();
 				String url = props.getProperty("dburl");
-				conn = DriverManager.getConnection(url, props);
+				String user = envProps.getProperty("DATABASE_USER");
+				String password = envProps.getProperty("DATABASE_PASSWORD");
+				conn = DriverManager.getConnection(url, user, password);
 			} catch (SQLException e) {
 				throw new DbException(e.getMessage());
 			}
@@ -46,7 +51,7 @@ public class DB {
 			throw new DbException(e.getMessage());
 		}
 	}
-	
+
 	public static void closeStatement(Statement st) {
 		if (st != null) {
 			try {
