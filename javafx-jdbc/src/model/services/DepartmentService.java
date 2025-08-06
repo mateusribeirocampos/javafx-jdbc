@@ -20,4 +20,5 @@ public class DepartmentService {
 		list.add(new Department(3, "Electronics", 40, "Lots of electronics for your devices"));
 		return list;*/
 	}
+	
 }

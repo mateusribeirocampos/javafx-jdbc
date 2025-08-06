@@ -47,6 +47,7 @@ public class DepartmentListController implements Initializable {
 
 	@FXML
 	private Button btNew;
+	
 
 	private ObservableList<Department> obsList;
 
@@ -55,7 +56,7 @@ public class DepartmentListController implements Initializable {
 		Stage parentStage = Utils.currentStage(event);
 		createDialogForm("/gui/DepartmentForm.fxml", parentStage);
 	}
-
+	
 	public void setDepartmentService(DepartmentService service) {
 		this.service = service;
 	}
