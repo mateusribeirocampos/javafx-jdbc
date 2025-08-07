@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Main;
+import gui.listener.DataChangeListener;
 import gui.util.Alerts;
 import gui.util.Utils;
 import javafx.collections.FXCollections;
@@ -26,7 +27,7 @@ import javafx.stage.Stage;
 import model.entities.Department;
 import model.services.DepartmentService;
 
-public class DepartmentListController implements Initializable {
+public class DepartmentListController implements Initializable, DataChangeListener {
 
 	private DepartmentService service;
 
@@ -47,7 +48,6 @@ public class DepartmentListController implements Initializable {
 
 	@FXML
 	private Button btNew;
-	
 
 	private ObservableList<Department> obsList;
 
@@ -57,7 +57,7 @@ public class DepartmentListController implements Initializable {
 		Department obj = new Department();
 		createDialogForm(obj, "/gui/DepartmentForm.fxml", parentStage);
 	}
-	
+
 	public void setDepartmentService(DepartmentService service) {
 		this.service = service;
 	}
@@ -83,6 +83,7 @@ public class DepartmentListController implements Initializable {
 		}
 		List<Department> list = service.findAll();
 		obsList = FXCollections.observableArrayList(list);
+		System.out.println("Department list: " + obsList);
 		tableViewDeparment.setItems(obsList);
 	}
 
@@ -93,14 +94,14 @@ public class DepartmentListController implements Initializable {
 			System.out.println("FXMLLoader created: " + loader.getLocation());
 			Pane pane = loader.load();
 			System.out.println("Pane loaded successfully: " + pane.getClass().getSimpleName());
-			
+
 			DepartmentFormController controller = loader.getController();
 			System.out.println("Department object: " + obj);
 			controller.setDepartment(obj);
 			controller.setDepartmentService(new DepartmentService());
+			controller.subscribeDataChangeListener(this);
 			controller.updateFormData();
-			
-			
+
 			Stage dialogStage = new Stage();
 			dialogStage.setTitle("Enter Department data");
 			dialogStage.setScene(new Scene(pane));
@@ -111,6 +112,12 @@ public class DepartmentListController implements Initializable {
 		} catch (IOException e) {
 			Alerts.showAlert("IO Exception", "Error load view", e.getMessage(), AlertType.ERROR);
 		}
+	}
+
+	@Override
+	public void onDataChanged() {
+		System.out.println("Call the function updateTableView");
+		updateTableView();
 	}
 
 }
