@@ -99,3 +99,8 @@ build/
 nbbuild/
 dist/
 nbdist/
+##############################
+## env
+##############################
+.env
+javafx-jdbc/.env
