@@ -3,7 +3,9 @@ package gui;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import db.DbException;
 import gui.listener.DataChangeListener;
@@ -18,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.entities.Department;
+import model.exceptions.ValidationException;
 import model.services.DepartmentService;
 
 public class DepartmentFormController implements Initializable {
@@ -81,6 +84,8 @@ public class DepartmentFormController implements Initializable {
 			service.saveOrUpdate(entity);
 			notifyDataChangeListener();
 			Utils.currentStage(event).close();
+		} catch (ValidationException e) {
+			setErrorMessages(e.getErrors());
 		} catch (DbException e) {
 			Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
 		}
@@ -101,12 +106,47 @@ public class DepartmentFormController implements Initializable {
 
 	private Department getFormData() {
 		Department obj = new Department();
+		ValidationException exception = new ValidationException("Validation error");
 		obj.setId(Utils.tryParseToInt(txtId.getText()));
+
+		if (txtName.getText() == null || txtName.getText().trim().equals("")) {
+			exception.addError("name", "Field can't be empty");
+		}
 		obj.setName(txtName.getText());
+
+		if (txtQuantity.getText() == null || txtQuantity.getText().trim().equals("")) {
+			exception.addError("quantity", "Field can't be empty");
+		} else {
+			Integer quantity = Utils.tryParseToInt(txtQuantity.getText());
+			if (quantity != null && quantity < 0) {
+				exception.addError("quantity", "Quantity cannot be negative");
+			}
+		}
 		obj.setQuantity(Utils.tryParseToInt(txtQuantity.getText()));
+
+		if (txtDescription.getText() == null || txtDescription.getText().trim().equals("")) {
+			exception.addError("description", "Field can't be empty");
+		}
 		obj.setDescription(txtDescription.getText());
+
+		if (exception.getErrors().size() > 0) {
+			throw exception;
+		}
+
 		System.out.println("The object create: " + obj);
 		return obj;
+	}
+
+	@Override
+	public void initialize(URL uri, ResourceBundle rb) {
+		initializeNodes();
+	}
+
+	private void initializeNodes() {
+		Constraints.setTextFieldInteger(txtId);
+		Constraints.setTextFieldMaxLength(txtName, 30);
+		Constraints.setTextFieldInteger(txtQuantity);
+		Constraints.setTextFieldMaxLength(txtDescription, 80);
 	}
 
 	public void updateFormData() {
@@ -120,17 +160,20 @@ public class DepartmentFormController implements Initializable {
 		txtDescription.setText(entity.getDescription());
 	}
 
-	@Override
-	public void initialize(URL uri, ResourceBundle rb) {
-		initializeNodes();
-	}
+	private void setErrorMessages(Map<String, String> errors) {
+		Set<String> fields = errors.keySet();
 
-	private void initializeNodes() {
-		Constraints.setTextFieldInteger(txtId);
-		Constraints.setTextFieldMaxLength(txtName, 30);
-		Constraints.setTextFieldInteger(txtQuantity);
-		Constraints.setTextFieldMaxLength(txtDescription, 80);
+		if (fields.contains("name")) {
+			labelErrorName.setText(errors.get("name"));
+		}
 
+		if (fields.contains("quantity")) {
+			labelErrorQuantity.setText(errors.get("quantity"));
+		}
+
+		if (fields.contains("description")) {
+			labelErrorDescription.setText(errors.get("description"));
+		}
 	}
 
 }
