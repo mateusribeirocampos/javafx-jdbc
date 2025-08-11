@@ -122,9 +122,9 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 		try {
 			st = conn.prepareStatement(
 				"UPDATE department " +
-				"SET Name = ? " + 
-				"SET Quantity = ?" +
-				"SET Description = ?" +
+				"SET Name = ?, " + 
+				"Quantity = ?, " +
+				"Description = ? " +
 				"WHERE Id = ?");
 
 			st.setString(1, obj.getName());
