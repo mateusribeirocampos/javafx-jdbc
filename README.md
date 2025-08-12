@@ -94,8 +94,15 @@ This project is a **workshop-style application** that teaches JavaFX development
      ```
 
 3. **Database Setup**:
-   - Create MySQL database using provided `database.sql`
-   - Configure `db.properties` with your database credentials
+   - Create MySQL database named `coursejavafx`
+   - Configure `db.properties` with your MySQL credentials:
+     ```properties
+     user=your_mysql_username
+     password=your_mysql_password
+     dburl=jdbc:mysql://localhost:3306/coursejavafx
+     useSSL=false
+     ```
+   - (Optional) Copy `.env.example` to `.env` and configure
 
 ### Running the Application
 
@@ -226,11 +233,17 @@ private void notifyDataChangeListeners() {
 ### Database Connection
 ```properties
 # db.properties
-user=root
-password=yourpassword
-dburl=jdbc:mysql://localhost:3306/coursejdbc
+user=your_mysql_username
+password=your_mysql_password
+dburl=jdbc:mysql://localhost:3306/coursejavafx
 useSSL=false
 ```
+
+**Configuration Steps**:
+1. Copy `.env.example` to `.env` (optional)
+2. Fill `db.properties` with your MySQL credentials
+3. Create database named `coursejavafx`
+4. Import SQL schema if provided
 
 ### VM Arguments for JavaFX
 ```bash
