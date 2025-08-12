@@ -1,6 +1,11 @@
 package gui.util;
 
 import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.Locale;
 
@@ -20,6 +25,14 @@ public class Utils {
 	public static Integer tryParseToInt(String str) {
 		try {
 			return Integer.parseInt(str);
+		} catch (NumberFormatException e) {
+			return null;
+		}
+	}
+	
+	public static Double tryParseToDouble(String str) {
+		try {
+		return Double.parseDouble(str);
 		} catch (NumberFormatException e) {
 			return null;
 		}
@@ -61,5 +74,40 @@ public class Utils {
 			};
 			return cell;
 		});
+	}
+	
+	public static Date parseDate(String dateStr) {
+		if (dateStr == null || dateStr.trim().isEmpty()) {
+			throw new IllegalArgumentException("Date can't be empty or null!");
+		}
+		
+		String[] formatDate = {
+				"dd/MM/yyyy",
+				"dd/MM/yyyy HH:mm:ss",
+				"dd-MM-yyyy",
+				"dd-MM-yyyy HH:mm:ss",
+				"yyyy-MM-dd"
+		};
+		
+		for(String checkFormatDates : formatDate) {
+			try {
+				DateTimeFormatter dtf = DateTimeFormatter.ofPattern(checkFormatDates);
+				LocalDateTime ldt;
+				
+				if (checkFormatDates.contains("HH:mm:ss")) {
+					ldt = LocalDateTime.parse(dateStr, dtf);
+				} else {
+					ldt = LocalDateTime.parse(dateStr + "00:00:00",
+							DateTimeFormatter.ofPattern(checkFormatDates + "HH:mm:ss"));
+				}
+				return Date.from(ldt.atZone(ZoneId.of("GMT")).toInstant());
+			} catch (DateTimeParseException e) {
+				continue;
+			}
+		}
+		
+		throw new IllegalArgumentException(String.format("Date '%s' is not in the knowleged format"
+				+ "Format accept: dd/MM/yyyy, dd-MM-yyyy, yyyy-MM-dd"
+				+ "(all format date can have or not HH:mm:ss", dateStr));
 	}
 }
