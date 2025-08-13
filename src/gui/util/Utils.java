@@ -1,19 +1,18 @@
 package gui.util;
 
 import java.text.SimpleDateFormat;
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.Locale;
 
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 public class Utils {
 
@@ -29,20 +28,20 @@ public class Utils {
 			return null;
 		}
 	}
-	
+
 	public static Double tryParseToDouble(String str) {
 		try {
-		return Double.parseDouble(str);
+			return Double.parseDouble(str);
 		} catch (NumberFormatException e) {
 			return null;
 		}
 	}
-	
+
 	public static <T> void formatTableColumnDate(TableColumn<T, Date> tableColumn, String format) {
 		tableColumn.setCellFactory(column -> {
 			TableCell<T, Date> cell = new TableCell<T, Date>() {
 				private SimpleDateFormat sdf = new SimpleDateFormat(format);
-				
+
 				@Override
 				protected void updateItem(Date item, boolean empty) {
 					super.updateItem(item, empty);
@@ -56,11 +55,11 @@ public class Utils {
 			return cell;
 		});
 	}
-	
+
 	public static <T> void formatTableColumnDouble(TableColumn<T, Double> tableColumn, int decimalPlaces) {
 		tableColumn.setCellFactory(column -> {
 			TableCell<T, Double> cell = new TableCell<T, Double>() {
-				
+
 				@Override
 				protected void updateItem(Double item, boolean empty) {
 					super.updateItem(item, empty);
@@ -68,46 +67,38 @@ public class Utils {
 						setText(null);
 					} else {
 						Locale.setDefault(Locale.US);
-						setText(String.format("%."+decimalPlaces+"f", item));
+						setText(String.format("%." + decimalPlaces + "f", item));
 					}
 				}
 			};
 			return cell;
 		});
 	}
-	
-	public static Date parseDate(String dateStr) {
-		if (dateStr == null || dateStr.trim().isEmpty()) {
-			throw new IllegalArgumentException("Date can't be empty or null!");
-		}
-		
-		String[] formatDate = {
-				"dd/MM/yyyy",
-				"dd/MM/yyyy HH:mm:ss",
-				"dd-MM-yyyy",
-				"dd-MM-yyyy HH:mm:ss",
-				"yyyy-MM-dd"
-		};
-		
-		for(String checkFormatDates : formatDate) {
-			try {
-				DateTimeFormatter dtf = DateTimeFormatter.ofPattern(checkFormatDates);
-				LocalDateTime ldt;
-				
-				if (checkFormatDates.contains("HH:mm:ss")) {
-					ldt = LocalDateTime.parse(dateStr, dtf);
-				} else {
-					ldt = LocalDateTime.parse(dateStr + "00:00:00",
-							DateTimeFormatter.ofPattern(checkFormatDates + "HH:mm:ss"));
-				}
-				return Date.from(ldt.atZone(ZoneId.of("GMT")).toInstant());
-			} catch (DateTimeParseException e) {
-				continue;
+
+	public static void formatDatePicker(DatePicker datePicker, String format) {
+		datePicker.setConverter(new StringConverter<LocalDate>() {
+			DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(format);
+			{
+				datePicker.setPromptText(format.toLowerCase());
 			}
-		}
-		
-		throw new IllegalArgumentException(String.format("Date '%s' is not in the knowleged format"
-				+ "Format accept: dd/MM/yyyy, dd-MM-yyyy, yyyy-MM-dd"
-				+ "(all format date can have or not HH:mm:ss", dateStr));
+
+			@Override
+			public String toString(LocalDate date) {
+				if (date != null) {
+					return dateFormatter.format(date);
+				} else {
+					return "";
+				}
+			}
+
+			@Override
+			public LocalDate fromString(String string) {
+				if (string != null && !string.isEmpty()) {
+					return LocalDate.parse(string, dateFormatter);
+				} else {
+					return null;
+				}
+			}
+		});
 	}
 }
