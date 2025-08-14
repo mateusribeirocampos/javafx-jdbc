@@ -69,9 +69,59 @@ This project is a **workshop-style application** that teaches JavaFX development
 - **Observer**: DataChangeListener for UI updates
 - **Consumer**: Parameterized view initialization
 
-## 🚀 Getting Started
+## 📥 Download & Installation
 
-### Prerequisites
+### Quick Installation (End Users)
+
+**For users who want to run the application directly:**
+
+1. **Download the Distribution**:
+   - Download `dist.7z` from the project repository
+   - Extract the archive to your preferred location (e.g., `C:\javafx-jdbc-app\`)
+
+2. **Prerequisites**:
+   - **Java 8+** installed on your system
+   - **MySQL Server** running locally or accessible remotely
+
+3. **Database Setup**:
+   - Create a MySQL database named `coursejavafx`
+   - Update the `db.properties` file in the extracted folder with your MySQL credentials:
+     ```properties
+     user=your_mysql_username
+     password=your_mysql_password
+     dburl=jdbc:mysql://localhost:3306/coursejavafx
+     useSSL=false
+     ```
+
+4. **Installation & Setup**:
+   - Follow the detailed installation guide in `readme.txt` included in the distribution package
+   - The package includes all necessary components: JavaFX SDK, JDK, and MySQL connector
+   - Setup instructions cover database configuration, environment variables, and multiple launch methods
+
+### System Requirements
+- **Operating System**: Windows 10/11 (64-bit)
+- **Memory**: Minimum 4GB RAM, Recommended 8GB RAM
+- **Storage**: At least 500MB free disk space
+- **Database**: MySQL Server 5.7+ or higher
+
+### Package Contents (dist.7z)
+- `javafx-jdbc.jar` - Main application JAR file
+- `db.properties` - Database configuration file
+- `javafx-jdbc_lib/` - JavaFX and MySQL libraries
+- `javafx-sdk-21.0.8/` - Complete JavaFX SDK
+- `jdk-21.0.2/` - Java Development Kit (self-contained)
+- `readme.txt` - Complete installation guide
+
+### Quick Start Command
+```bash
+java --module-path %PATH_TO_FX% --add-modules javafx.controls,javafx.fxml -cp javafx-jdbc.jar application.Main
+```
+
+> **📋 Note**: For complete installation instructions, database setup, troubleshooting, and configuration details, please refer to `readme.txt` included in the distribution package.
+
+## 🚀 Development Setup
+
+### Prerequisites for Developers
 - **Java 8+** with JAVA_HOME configured
 - **JavaFX SDK** with PATH_TO_FX environment variable
 - **MySQL Server** installed and running
